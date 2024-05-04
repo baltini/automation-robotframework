@@ -1,27 +1,42 @@
 *** Settings ***
 Resource    ../Pages/ProductManagementPage.robot
 Resource    ../Pages/ProductManagementEditPage.robot
-Library    Screenshot
+Library    SeleniumLibrary
+Library    String
 
-*** Variables ***
-${PRODUCT_MANAGEMENT_LINK}     xpath=//a[@class='group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out text-primary active']
-${FIRST_DATA_TABLE_LOCATOR}    xpath=//a[contains(@class,'font-medium text-p')]
+*** Keywords *** 
+Enter Search by Product Name with Delay
+    [Arguments]    ${productName}
+    Wait Until Element Is Visible    ${SEARCH_FIELD}
+    ${chunked_text}=    Split String To Characters    ${productName}
+    FOR    ${char}    IN    @{chunked_text}
+        Press Keys    ${SEARCH_FIELD}    ${char}
+    END
+    Press Keys    ${SEARCH_FIELD}    ENTER
+    Wait Until Element Is Visible    ${PRODUCT_IMAGE}    15
 
-*** Keywords ***
+Product Name in n row should contain
+    [Arguments]    ${n}    ${data}
+    ${result}=    Get Text    xpath=//tbody/tr[${n}]/td[1]/div  
+    ${resultToLower}=    Convert To Lower Case    ${result}  
+    ${dataToLower}=    Convert To Lower Case    ${data} 
+    Should Contain    ${resultToLower}    ${dataToLower}
+
 Open Product Management Page
-    Click a Element          ${PRODUCT_MANAGEMENT_LINK}
-    Page should have text    Product Management
+    Wait Until Element Is Visible    ${PRODUCT_MANAGEMENT_LINK}
+    Click Element                    ${PRODUCT_MANAGEMENT_LINK}
+    Wait Until Page Contains         Product Management
     
 Validate every Filter Label on page
-    Page should have text    Search
-    Page should have text    Status
-    Page should have text    Size Checking Status
-    Page should have text    Size Checking Issues
-    Page should have text    Retailer
-    Page should have text    Vendor
-    Page should have text    Product ID
-    Page should have text    Category
-    Page should have text    Show Multiple Retailers
+    Wait Until Page Contains    Search
+    Wait Until Page Contains    Status
+    Wait Until Page Contains    Size Checking Status
+    Wait Until Page Contains    Size Checking Issues
+    Wait Until Page Contains    Retailer
+    Wait Until Page Contains    Vendor
+    Wait Until Page Contains    Product ID
+    Wait Until Page Contains    Category
+    Wait Until Page Contains    Show Multiple Retailers
 
 Validate Search result should contain
     [Arguments]    ${productNameResult}
@@ -32,28 +47,29 @@ Search Product By Product Name
     Enter Search by Product Name with Delay    ${productName}
 
 Select a Product from Table
-    Click a Element    ${FIRST_DATA_TABLE_LOCATOR} 
+    Wait Until Element Is Visible    ${FIRST_DATA_TABLE_LOCATOR}
+    Click Element                    ${FIRST_DATA_TABLE_LOCATOR} 
 
 Validate Edit Product Page
-    Page should have text    Edit Product
-    Page should have text    Product Information
-    Page should have text    Product Name
-    Page should have text    Product Status
-    Page should have text    Description
-    Page should have text    Material
-    Page should have text    Origin
-    Page should have text    Product ID
-    Page should have text    Media
-    Page should have text    Product Variants
-    Page should have text    Product Organization
-    Page should have text    Category
-    Page should have text    Product Type / Sub Category
-    Page should have text    Tags
-    Page should have text    Season
-    Page should have text    Color
-    Page should have text    Size Checking Issues
-    Page should have text    Size Checking Status
-    Page should have text    Product Merging Status
+    Wait Until Page Contains    Edit Product
+    Wait Until Page Contains    Product Information
+    Wait Until Page Contains    Product Name
+    Wait Until Page Contains    Product Status
+    Wait Until Page Contains    Description
+    Wait Until Page Contains    Material
+    Wait Until Page Contains    Origin
+    Wait Until Page Contains    Product ID
+    Wait Until Page Contains    Media
+    Wait Until Page Contains    Product Variants
+    Wait Until Page Contains    Product Organization
+    Wait Until Page Contains    Category
+    Wait Until Page Contains    Product Type / Sub Category
+    Wait Until Page Contains    Tags
+    Wait Until Page Contains    Season
+    Wait Until Page Contains    Color
+    Wait Until Page Contains    Size Checking Issues
+    Wait Until Page Contains    Size Checking Status
+    Wait Until Page Contains    Product Merging Status
 
 Perform edit product detail
     Edit Product Name
@@ -65,5 +81,112 @@ Perform edit product detail
     Edit Product Category
     Edit Product Product Type / Sub Category
     Edit Product Tags
-    Sleep    3
-    Take Screenshot
+    Delete Product image
+    Add Product image
+    Edit Product Season
+    Edit Product Color
+    Edit Product Size Checking
+    Edit Product Variants
+    Verify all field has updated
+    # Click Save Update Button    
+
+*** Keywords ***
+Edit Product Name
+    Sleep    2
+    Input Text    ${PRODUCT_NAME_FIELD}    ${SPACE}${PRODUCT_NAME_VALUE}
+
+Edit Product Status 
+    Click Element    ${PRODUCT_STATUS_DROP_DOWN}
+    Click Element    ${PRODUCT_STATUS_DROP_DOWN_VALUE}
+
+Edit Product Description 
+    Input Text    ${DESCRIPTION_FIELD}    ${SPACE}${DESCRIPTION_VALUE}
+
+Edit Product Material 
+    Wait Until Element Is Visible    ${MATERIAL_FIELD}
+    Input Text    ${MATERIAL_FIELD}    ${SPACE}${MATERIAL_VALUE}
+
+Edit Product Origin 
+    Wait Until Element Is Visible    ${ORIGIN_FIELD}
+    Input Text    ${ORIGIN_FIELD}    ${SPACE}${ORIGIN_VALUE}
+
+Edit Product Product ID 
+    Wait Until Element Is Visible    ${PRODUCT_ID_FIELD}
+    Input Text    ${PRODUCT_ID_FIELD}    ${SPACE}${PRODUCT_ID_VALUE}
+
+Edit Product Category 
+    Wait Until Element Is Visible    ${CATEGORY_FIELD}
+    Input Text    ${CATEGORY_FIELD}    ${SPACE}${CATEGORY_VALUE}
+
+Edit Product Product Type / Sub Category 
+    Wait Until Element Is Visible    ${PRODUCT_TYPE_FIELD}
+    Input Text    ${PRODUCT_TYPE_FIELD}    ${SPACE}${PRODUCT_TYPE_VALUE}
+
+Edit Product Tags 
+    Wait Until Element Is Visible    ${TAGS_FIELD}
+    Enter text using Press Key Keyword    ${TAGS_FIELD}    ${TAGS_VALUE}
+
+Enter text using Press Key Keyword
+    [Arguments]    ${locator}    ${text}
+    ${chunked_text}=    Split String To Characters    ${text}
+    FOR    ${char}    IN    @{chunked_text}
+        Press Keys    ${locator}    ${char}
+    END
+    Press Keys    ${locator}    ENTER
+
+Edit Product Season 
+    Scroll Element Into View    ${SIZE_CHECKING_DROP_DOWN}
+    Click Element             ${SEASON_DROP_DOWN}
+    Click Element             ${SEASON_DROP_DOWN_VALUE}
+
+Edit Product Color 
+    Scroll Element Into View   ${COLOR_DROP_DOWN}
+    Click Element            ${COLOR_DROP_DOWN}
+    Click Element            ${COLOR_DROP_DOWN_VALUE}
+
+Edit Product Size Checking 
+    Scroll Element Into View   ${SIZE_CHECKING_DROP_DOWN}
+    Click Element            ${SIZE_CHECKING_DROP_DOWN}
+    Click Element            ${SIZE_CHECKING_DROP_DOWN_VALUE}
+
+Delete Product image
+    Click Element            ${LAST_PRODUCT_IMAGE}
+    Click Element            xpath=//*[text()='Remove']
+
+Add Product image
+    Scroll Element Into View    xpath=//*[text()='Product Variants']
+    Click Element             ${ADD_IMAGE_BUTTON}
+    Enter text using Press Key Keyword    ${IMAGE_FIELD_4}    ${PRODUCT_IMAGE_LINK}
+
+Edit Product Variants
+    Wait Until Element Is Visible    ${PRODUCT_VARIANT_1}
+    Clear Element Text    ${PRODUCT_VARIANT_1}
+    Input Text    ${PRODUCT_VARIANT_1}    ${SPACE}${PRODICT_VARIANT_TITLE}
+
+Click Save Update Button
+    Click Element    ${SAVE_UPDATE_BUTTON}
+    Reload Page
+
+Verify a Element value contains Text
+    [Arguments]    ${text}
+    Wait Until Element Is Visible    xpath=//*[contains(@value,'${text}')]
+
+Verify a Element contains text
+    [Arguments]    ${text}
+    Wait Until Element Is Visible    xpath=//*[contains(text(),'${text}')]
+
+Verify all field has updated
+    Verify a Element value contains Text    ${PRODUCT_NAME_VALUE}
+    Verify a Element contains text          ${PRODUCT_STATUS_VALUE}
+    Verify a Element contains text          ${DESCRIPTION_VALUE}
+    Verify a Element value contains Text    ${PRODUCT_IMAGE_LINK}  
+    Verify a Element value contains Text    ${MATERIAL_VALUE}
+    Verify a Element value contains Text    ${ORIGIN_VALUE}
+    Verify a Element value contains Text    ${PRODUCT_ID_VALUE}
+    Verify a Element value contains Text    ${PRODICT_VARIANT_TITLE}
+    Verify a Element value contains Text    ${CATEGORY_VALUE}
+    Verify a Element value contains Text    ${PRODUCT_TYPE_VALUE}
+    Verify a Element contains text          ${TAGS_VALUE}
+    Verify a Element contains text          ${SEASON_VALUE}
+    Verify a Element contains text          ${COLOR_VALUE}
+    Verify a Element contains text          ${SIZE_CHECKING_VALUE}
