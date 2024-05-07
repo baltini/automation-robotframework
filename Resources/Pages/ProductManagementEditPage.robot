@@ -9,7 +9,7 @@ ${PRODUCT_IMAGE_LINK}      https://t.ly/SDB6W
 ${LAST_PRODUCT_IMAGE}      xpath=//td/div[@class='flex justify-center'][last()]
 
 ${PRODUCT_NAME_FIELD}    xpath=//input[@type='text'][1]
-${DESCRIPTION_FIELD}     xpath=//div[@class='col-span-3']//p[3]
+${DESCRIPTION_FIELD}     xpath=//div[@class='ql-editor']
 ${MATERIAL_FIELD}        xpath=//label[text()='Material']//following-sibling::div//input
 ${ORIGIN_FIELD}          xpath=//label[text()='Origin']//following-sibling::div//input
 ${PRODUCT_ID_FIELD}      xpath=//label[text()='Product ID']//following-sibling::div//input

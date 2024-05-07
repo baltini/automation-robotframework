@@ -1,9 +1,11 @@
 *** Settings ***
 Library           SeleniumLibrary
 Resource          ../Resources/Keywords/LoginKeywords.robot
+Resource          ../Resources/Keywords/HomeKeywords.robot
+Resource          ../Resources/Variable/Variable.robot
 
 *** Test Cases ***
-Check Menu on Page
-    Login To ERP    admin1@gmail.com    secret123
-    # Add verification steps here
+Navigate to Home Page
+    Login To ERP    ${EMAIL}     ${PASSWORD}  
+    Home Page Should Contains Menu
     Close Browser

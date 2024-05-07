@@ -88,7 +88,7 @@ Perform edit product detail
     Edit Product Size Checking
     Edit Product Variants
     Verify all field has updated
-    # Click Save Update Button    
+    Click Save Update Button    
 
 *** Keywords ***
 Edit Product Name
@@ -147,8 +147,6 @@ Edit Product Color
 Edit Product Size Checking 
     Scroll Element Into View   ${SIZE_CHECKING_DROP_DOWN}
     Click Element            ${SIZE_CHECKING_DROP_DOWN}
-    Click Element            ${SIZE_CHECKING_DROP_DOWN_VALUE}
-
 Delete Product image
     Click Element            ${LAST_PRODUCT_IMAGE}
     Click Element            xpath=//*[text()='Remove']
@@ -164,8 +162,11 @@ Edit Product Variants
     Input Text    ${PRODUCT_VARIANT_1}    ${SPACE}${PRODICT_VARIANT_TITLE}
 
 Click Save Update Button
+    Scroll Element Into View    ${SAVE_UPDATE_BUTTON}
+    Wait Until Element Is Visible    ${SAVE_UPDATE_BUTTON}
+    Click Element At Coordinates    ${SAVE_UPDATE_BUTTON}    10    10
     Click Element    ${SAVE_UPDATE_BUTTON}
-    Reload Page
+    Wait Until Page Contains    Product has been updated!
 
 Verify a Element value contains Text
     [Arguments]    ${text}
