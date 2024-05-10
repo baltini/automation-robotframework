@@ -1,5 +1,7 @@
 *** Settings ***
-Library    SeleniumLibrary
+Library          SeleniumLibrary
+Resource         ../Resources/Variable/Variable.robot
+
 *** Variables ***
 ${LOGIN_PAGE_TITLE}    Baltini ERP
 ${USERNAME_FIELD}      xpath=//input[@placeholder='Enter your email']
