@@ -60,7 +60,7 @@ To confirm everything is set up correctly, let's run the test case:
 3. Run the test by executing:
 
    ```
-   robot Tests/LoginTests.robot
+   robot Tests
    ```
 
 ## Conclusion
