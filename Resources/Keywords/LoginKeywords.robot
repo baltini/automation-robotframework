@@ -6,9 +6,7 @@ Resource    ../Variable/Variable.robot
 Login To ERP
     [Arguments]    ${username}    ${password}
     Open Login Page
-    Wait Until Element Is Visible    ${username}    ${WAITING_TIME}
     Enter Username    ${username}
-    Wait Until Element Is Visible    ${password}    ${WAITING_TIME}
     Enter Password    ${password}
     Click Login
 
@@ -19,10 +17,12 @@ Open Login Page
 
 Enter Username
     [Arguments]    ${username}
+    Wait Until Element Is Visible    ${USERNAME_FIELD}
     Input Text    ${USERNAME_FIELD}    ${username}
 
 Enter Password
     [Arguments]    ${password}
+    Wait Until Element Is Visible    ${USERNAME_FIELD}
     Input Text    ${PASSWORD_FIELD}    ${password}
 
 Click Login
