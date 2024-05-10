@@ -11,6 +11,7 @@ Login To ERP
 
 Open Login Page
     Open Browser       ${LOGIN_PATH}    ${BROWSER}
+    Sleep    20
     Title Should Be    ${LOGIN_PAGE_TITLE}
     Maximize Browser Window
 
