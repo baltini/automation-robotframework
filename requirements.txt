@@ -4,4 +4,4 @@ robotframework-databaselibrary
 robotframework-requests
 robotframework-seleniumlibrary
 webdrivermanager
-webdrivermanager chrome:latest --linkpath /usr/local/bin
+webdrivermanager chrome:latest
