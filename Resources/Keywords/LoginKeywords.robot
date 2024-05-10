@@ -10,7 +10,7 @@ Login To ERP
     Click Login
 
 Open Login Page
-    Open Browser       ${LOGIN_PATH}    headlesschrome
+    Open Browser       ${LOGIN_PATH}    {BROWSER}
     Title Should Be    ${LOGIN_PAGE_TITLE}
     Maximize Browser Window
 
