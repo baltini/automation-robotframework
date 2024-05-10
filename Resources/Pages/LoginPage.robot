@@ -1,6 +1,5 @@
 *** Settings ***
 Library          SeleniumLibrary
-Resource         ../Resources/Variable/Variable.robot
 
 *** Variables ***
 ${LOGIN_PAGE_TITLE}    Baltini ERP
