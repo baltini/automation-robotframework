@@ -8,7 +8,6 @@ Resource          ../Resources/Variable/Variable.robot
 *** Test Cases ***
 Login with valid Username and Password
     Login To ERP    ${EMAIL}     ${PASSWORD}  
-    Sleep    2000
     Home Page Should Contains Menu    
     Close Browser
 
