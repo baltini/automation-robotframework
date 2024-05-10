@@ -19,9 +19,15 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
+          sudo apt-get update
+          sudo apt-get install -y wget unzip
+          wget https://storage.googleapis.com/chrome-for-testing-public/124.0.6367.201/mac-x64/chromedriver-mac-x64.zip
+          unzip chromedriver_linux64.zip
+          sudo mv chromedriver /usr/local/bin/
+          sudo chmod +x /usr/local/bin/chromedriver
           
       - name: Run Robot Framework tests
-        run: robot -d results Tests/
+        run: robot --variable BROWSER:headlesschrome Tests/
 
       - name: Upload Robot Framework Report to Artifacts
         uses: actions/upload-artifact@v2
