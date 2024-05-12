@@ -34,3 +34,16 @@ jobs:
         with:
           name: robot-framework-report
           path: results/
+
+      - name: Send Report to Slack
+        uses: 8398a7/action-slack@v3
+        with:
+          status: ${{ job.status }}
+          author_name: Your Github Actions
+          fields: repo,message,commit,author,action,eventName,ref,workflow,took  # Adjust or remove fields based on your preferences
+          # If you use outputs from the Robot Framework step, you can format a more detailed message here
+          text: Robot Framework Test Results are here! Check the attachment.
+          files: results/report.html  # Adjust the path to your Robot Framework report
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
