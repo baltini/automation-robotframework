@@ -40,10 +40,11 @@ jobs:
 
       - name: Upload Reports to Slack
         env:
-          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_TOKEN }}
+          SLACK_CHANNEL: C072G3NS0JK
         run: |
           # Example command to upload an example report file
           # You'll need a script or CLI tool that handles the Slack files.upload API call
           pwd
           ls -la
-          curl -F file=@./results/report.html -F channels=C072G3NS0JK -F token=${SLACK_BOT_TOKEN} https://slack.com/api/files.upload
+          curl -F file=@./results/report.html -F channels=${SLACK_CHANNEL} -F token=${SLACK_BOT_TOKEN} https://slack.com/api/files.upload
