@@ -27,13 +27,19 @@ jobs:
           sudo chmod +x /usr/local/bin/chromedriver
           
       - name: Run Robot Framework tests
-        run: robot Tests/LoginTests.robot || true
-      
-      - name: Upload reports to Slack
-        env:
-          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
-          CHANNEL_ID: 'C072G3NS0JK'
-        run: |
-          for file in output.xml log.html report.html; do
-            curl -F file=@${file} -F channels=${CHANNEL_ID} -F token=${SLACK_BOT_TOKEN} https://slack.com/api/files.upload
-          done
+        run: robot -d results Tests/LoginTests.robot || true
+
+      - name: Archive Test Reports and Screenshots
+        uses: actions/upload-artifact@v2
+        with:
+          name: robot-reports
+          path: | 
+            ./results/*.html ./results/*.png
+
+            - name: Upload Reports to Slack
+            env:
+              SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+            run: |
+              # Example command to upload an example report file
+              # You'll need a script or CLI tool that handles the Slack files.upload API call
+              curl -F file=@./results/report.html -F channels=YOUR_SLACK_CHANNEL_ID -F token=${SLACK_BOT_TOKEN} https://slack.com/api/files.upload
