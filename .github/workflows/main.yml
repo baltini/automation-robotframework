@@ -40,7 +40,7 @@ jobs:
 
       - name: Upload Reports to Slack
         env:
-          SLACK_BOT_TOKEN: xoxe.xoxp-1-Mi0yLTM4OTM0NTkyMjQyMTEtNjg4Mjg3OTkxODg3MC03MTA0MjY2NDMxOTg3LTcwOTc3NDk1Mjg0ODYtYzAyYjFhNWU1ODhmNDg4OGRmYzkxNTc1MjdmNDUwYzlmMDNkNWJmZTlkNmVhZTc2N2UwMTdkYzUwNmVmNjVlNg
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
         run: |
           # Example command to upload an example report file
           # You'll need a script or CLI tool that handles the Slack files.upload API call
