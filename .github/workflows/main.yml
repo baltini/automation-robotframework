@@ -39,24 +39,36 @@ jobs:
         run:  echo 'Artifact ID is ${{ steps.artifact-upload-step.outputs.artifact-id }}'
 
       - name: Send notification to Slack
-        uses: slackapi/slack-github-action@v1.25.0
+      - uses: 8398a7/action-slack@v3
         with:
-          # Slack channel id, channel name, or user id to post message.
-          # See also: https://api.slack.com/methods/chat.postMessage#channels
-          channel-id: 'C072G3NS0JK' # #baltini-automation-test-report
-          # For posting a rich message using Block Kit
-          payload: |
+          status: custom
+          custom_payload: |
             {
-              "blocks": [
+              text: "Custom Field Check",
+              attachments: [{
+                "author_name": "8398a7@action-slack", // json
+                fallback: 'fallback',
+                color: 'good',
+                title: 'CI Result',
+                text: 'Succeeded',
+                fields: [{
+                  title: 'lower case',
+                  value: 'LOWER CASE CHECK'.toLowerCase(),
+                  short: true
+                },
                 {
-                  "type": "header",
-                  "text": {
-                    "type": "plain_text",
-                    "text": "Deployment Successful. :tada:",
-                    "emoji": true
-                  }
-                }
-              ]
-            }
+                  title: 'reverse',
+                  value: 'gnirts esrever'.split('').reverse().join(''),
+                  short: true
+                },
+                {
+                  title: 'long title1',
+                  value: 'long value1',
+                  short: false
+                }],
+                actions: [{
+                }]
+              }]
+            }        
         env:
-          SLACK_BOT_TOKEN: ${{ secrets.SLACK_TOKEN }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
