@@ -47,4 +47,4 @@ jobs:
           # You'll need a script or CLI tool that handles the Slack files.upload API call
           pwd
           ls -la
-          curl -F file=@./results/report.html -F channels=YOUR_SLACK_CHANNEL_ID -F token=${SLACK_BOT_TOKEN} https://slack.com/api/files.upload
+          curl -F file=@./results/report.html -F channels=C072G3NS0JK -F token=${SLACK_BOT_TOKEN} https://slack.com/api/files.upload
