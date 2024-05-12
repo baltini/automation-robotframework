@@ -27,20 +27,37 @@ jobs:
           sudo chmod +x /usr/local/bin/chromedriver
           
       - name: Run Robot Framework tests
-        run: |
-              robot -d results Tests/LoginTests.robot || true 
-              ls -la
-              pwd
-
+        run: robot -d results Tests/LoginTests.robot || true 
+        
       - name: Archive Test Reports and Screenshots
+        id: artifact-upload-step
         uses: actions/upload-artifact@v2
         with:
-          name: robot-reports
+          name: automaiton-test-reports
           path: results
+          
+      - name: Output artifact ID
+        run:  echo 'Artifact ID is ${{ steps.artifact-upload-step.outputs.artifact-id }}'
 
-      - name: Upload Reports to Slack
+      - name: Send notification to Slack
+        uses: slackapi/slack-github-action@v1.25.0
+        with:
+          # Slack channel id, channel name, or user id to post message.
+          # See also: https://api.slack.com/methods/chat.postMessage#channels
+          channel-id: 'C072G3NS0JK' # #baltini-automation-test-report
+          # For posting a rich message using Block Kit
+          payload: |
+            {
+              "blocks": [
+                {
+                  "type": "header",
+                  "text": {
+                    "type": "plain_text",
+                    "text": "Deployment Successful. :tada:",
+                    "emoji": true
+                  }
+                }
+              ]
+            }
         env:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_TOKEN }}
-          SLACK_CHANNEL: C072G3NS0JK
-        run: |
-            curl https://slack.com/api/files.upload -F token="${SLACK_BOT_TOKEN}" -F channels="${SLACK_CHANNEL}" -F title="${message_title}" -F filename="report.html" -F file=@results
