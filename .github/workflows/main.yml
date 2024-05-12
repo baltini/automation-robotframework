@@ -28,6 +28,7 @@ jobs:
           
       - name: Run Robot Framework tests
         run: robot --outputdir ./results Tests/LoginTests.robot || true
+             pwd && ls -la
 
       - name: Archive Test Reports and Screenshots
         uses: actions/upload-artifact@v2
