@@ -27,7 +27,7 @@ jobs:
           sudo chmod +x /usr/local/bin/chromedriver
           
       - name: Run Robot Framework tests
-        run: robot -d results Tests || true
+        run: robot -d results Tests/LoginTests.robot || true
 
       - name: Upload Robot Framework Report to Artifacts
         uses: actions/upload-artifact@v2
@@ -43,7 +43,7 @@ jobs:
           fields: repo,message,commit,author,action,eventName,ref,workflow,took  # Adjust or remove fields based on your preferences
           # If you use outputs from the Robot Framework step, you can format a more detailed message here
           text: Robot Framework Test Results are here! Check the attachment.
-          files: results/report.html  # Adjust the path to your Robot Framework report
+          files: results/robot-framework-report/report.html  # Adjust the path to your Robot Framework report
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
