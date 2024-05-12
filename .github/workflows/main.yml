@@ -29,21 +29,14 @@ jobs:
       - name: Run Robot Framework tests
         run: robot -d results Tests/LoginTests.robot || true
 
-      - name: Upload Robot Framework Report to Artifacts
-        uses: actions/upload-artifact@v2
-        with:
-          name: robot-framework-report
-          path: results/report.html
+      # - name: Upload Robot Framework Report to Artifacts
+      #   uses: actions/upload-artifact@v2
+      #   with:
+      #     name: robot-framework-report
+      #     path: results/report.html
 
-      - name: Send Report to Slack
-        uses: 8398a7/action-slack@v3
-        with:
-          status: ${{ job.status }}
-          author_name: Your Github Actions
-          fields: repo,message,commit,author,action,eventName,ref,workflow,took  # Adjust or remove fields based on your preferences
-          # If you use outputs from the Robot Framework step, you can format a more detailed message here
-          text: Robot Framework Test Results are here! Check the attachment.
-          files: results/report.html  # Adjust the path to your Robot Framework report
+      - name: Post results to Slack
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          curl -X POST -H 'Content-type: application/json' --data '{"text":"Robot Framework Test Results: \n$(<results/output.xml)"}' ${{secrets.SLACK_WEBHOOK_URL}}
