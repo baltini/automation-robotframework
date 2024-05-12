@@ -35,15 +35,11 @@ jobs:
           name: robot-framework-report
           path: results/
 
-      - name: Send Report to Slack
-        uses: 8398a7/action-slack@v3
-        with:
-          status: ${{ job.status }}
-          author_name: Your Github Actions
-          fields: repo,message,commit,author,action,eventName,ref,workflow,took,attachments  # Adjust or remove fields based on your preferences
-          # If you use outputs from the Robot Framework step, you can format a more detailed message here
-          text: Robot Framework Test Results are here! Check the attachment.
-          files: results/robot-framework-report/report.html  # Adjust the path to your Robot Framework report
+      - name: Post results to Slack
         env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # Stored in GitHub Secrets
+        run: |
+            # Assuming results are saved in output.xml, adjust as needed
+            # Use any tool or script compatible with your environment to parse and send results.
+            # Here is a simple curl example to post a message to Slack
+            curl -X POST -H 'Content-type: application/json' --data '{"text":"Robot Framework Test Results: results/output.xml"}' ${{secrets.SLACK_WEBHOOK_URL}}
