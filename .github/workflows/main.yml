@@ -28,6 +28,16 @@ jobs:
           
       - name: Run Robot Framework tests
         run: robot -d results Tests/LoginTests.robot || true 
+
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan 104.237.1.165 >> ~/.ssh/known_hosts
+    
+      - name: Copy files to the server
+        run: scp -r results atelier@104.237.1.165:automation-report/
         
       - uses: actions/upload-artifact@v4
         id: artifact-upload-step
