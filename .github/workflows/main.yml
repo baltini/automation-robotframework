@@ -57,10 +57,3 @@ jobs:
   
       - name: Output artifact ID
         run:  echo 'Artifact ID is ${{ steps.artifact-upload-step.outputs.artifact-id }}'
-    
-      - name: Send message to Slack
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-          run: |
-              REPORT_LINK = https://healthy-strongly-wolf.ngrok-free.app/${{ steps.datestring.outputs.date }}
-              curl -X POST -H 'Content-type: application/json' --data '{"text":"Here is your link: <${REPORT_LINK}>"}' $SLACK_WEBHOOK_URL
