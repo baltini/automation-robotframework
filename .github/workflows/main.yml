@@ -26,7 +26,7 @@ jobs:
           sudo chmod +x /usr/local/bin/chromedriver
           
       - name: Run Robot Framework tests
-        run: robot -d results Tests/LoginTests.robot || true 
+        run: robot -d results Tests || true 
 
       - name: Generate Date String
         id: datestring
