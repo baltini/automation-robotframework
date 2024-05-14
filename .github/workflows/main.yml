@@ -29,6 +29,12 @@ jobs:
       - name: Run Robot Framework tests
         run: robot -d results Tests/LoginTests.robot || true 
 
+      - name: Organize Reports
+        run: |
+            REPORT_DIR=$(date +%Y%m%d_%H%M%S)
+            mkdir -p "reports/${REPORT_DIR}"
+            mv results/* "reports/${REPORT_DIR}/"
+
       - name: Setup SSH
         run: |
           mkdir -p ~/.ssh
@@ -42,8 +48,8 @@ jobs:
       - uses: actions/upload-artifact@v4
         id: artifact-upload-step
         with:
-          name: my-artifact
-          path: results
+          name: robotframework-reports-${{ github.run_number }}
+          path: reports/**
   
       - name: Output artifact ID
         run:  echo 'Artifact ID is ${{ steps.artifact-upload-step.outputs.artifact-id }}'
@@ -51,7 +57,6 @@ jobs:
       - uses: 8398a7/action-slack@v3
         with:
           status: custom
-          fields: workflow,job,commit,repo,ref,author,took
           custom_payload: |
             {
               attachments: [{
