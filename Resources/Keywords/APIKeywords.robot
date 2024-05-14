@@ -20,7 +20,7 @@ Perform Login using API
     Status Should Be    200    ${response}
     ${response_json}=    Evaluate    json.loads('''${response.content}''')    json
     ${token}=    Set Variable    ${response_json['data']['token']}
-    [Return]    ${token}
+    RETURN    ${token}
 
 
 Set Product Detail data back to original
@@ -69,4 +69,4 @@ Create a Product Testing
 
     # Example of asserting the status code
     Should Be Equal As Strings    ${response.status_code}    201
-    [Return]    ${id}
+    RETURN    ${id}
