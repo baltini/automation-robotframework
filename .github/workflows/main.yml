@@ -43,7 +43,7 @@ jobs:
           ssh-keyscan 104.237.1.165 >> ~/.ssh/known_hosts
     
       - name: Copy files to the server
-        run: scp -r results atelier@104.237.1.165:automation-report/
+        run: scp -r reports/${REPORT_DIR} atelier@104.237.1.165:automation-report/
         
       - uses: actions/upload-artifact@v4
         id: artifact-upload-step
