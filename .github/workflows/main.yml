@@ -5,9 +5,6 @@ on: [push, pull_request]
 jobs:
   build:
     runs-on: ubuntu-latest
-    env: 
-      REPORT_DIR : $(date +%Y%m%d_%H%M%S)
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -31,10 +28,16 @@ jobs:
       - name: Run Robot Framework tests
         run: robot -d results Tests/LoginTests.robot || true 
 
-      - name: Organize Reports
+      - name: Generate Date String
+        id: datestring
+        run: echo "::set-output name=date::$(date +%Y%m%d_%H%M%S)"
+      
+      - name: Use Date in Folder Name
         run: |
-            mkdir -p "reports/${REPORT_DIR}"
-            mv results/* "reports/${REPORT_DIR}/"
+          REPORT_DIR="${{ steps.datestring.outputs.date }}"
+          echo $REPORT_DIR
+          mkdir -p "reports/${REPORT_DIR}"
+          mv results/* "reports/${REPORT_DIR}/"
 
       - name: Setup SSH
         run: |
@@ -44,7 +47,7 @@ jobs:
           ssh-keyscan 104.237.1.165 >> ~/.ssh/known_hosts
     
       - name: Copy files to the server
-        run: scp -r reports/${REPORT_DIR} atelier@104.237.1.165:automation-report/
+        run: scp -r reports/${{ steps.datestring.outputs.date }} atelier@104.237.1.165:automation-report/
         
       - uses: actions/upload-artifact@v4
         id: artifact-upload-step
