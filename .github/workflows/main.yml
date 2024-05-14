@@ -62,4 +62,5 @@ jobs:
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
         run: |
-          curl -X POST -H 'Content-type: application/json' --data '{"text":"Here is your link: <https://example.com|Click Here>"}' $SLACK_WEBHOOK_URL
+          REPORT_PATH="https://healthy-strongly-wolf.ngrok-free.app"
+          curl -X POST -H 'Content-type: application/json' --data '{"text":"Here is your link: <${REPORT_PATH}|Click Here>"}' $SLACK_WEBHOOK_URL
