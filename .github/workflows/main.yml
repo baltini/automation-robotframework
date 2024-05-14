@@ -31,7 +31,7 @@ jobs:
 
       - name: Organize Reports
         run: |
-            REPORT_DIR = $(date +%Y%m%d_%H%M%S)
+            REPORT_DIR=$(date +%Y%m%d_%H%M%S)
             mkdir -p "reports/${REPORT_DIR}"
             mv results/* "reports/${REPORT_DIR}/"
 
