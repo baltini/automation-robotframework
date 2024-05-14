@@ -54,13 +54,6 @@ jobs:
         with:
           name: robotframework-reports-${{ github.run_number }}
           path: reports/**
-  
-      - name: Output artifact ID
-        run:  echo 'Artifact ID is ${{ steps.artifact-upload-step.outputs.artifact-id }}'
-
-      - name: Set Link Variable
-        id: setvar
-        run: echo "LINK_VARIABLE=$(echo 'https://healthy-strongly-wolf.ngrok-free.app/${{ steps.datestring.outputs.date }}/log.html')" >> $GITHUB_ENV
 
       - name: Send message to Slack
         env:
