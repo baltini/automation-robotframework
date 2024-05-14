@@ -31,6 +31,7 @@ jobs:
 
       - name: Organize Reports
         run: |
+            REPORT_DIR = $(date +%Y%m%d_%H%M%S)
             mkdir -p "reports/${REPORT_DIR}"
             mv results/* "reports/${REPORT_DIR}/"
 
@@ -56,6 +57,7 @@ jobs:
       - uses: 8398a7/action-slack@v3
         with:
           status: custom
+          fields: workflow,job,commit,repo,ref,author,took
           custom_payload: |
             {
               attachments: [{
@@ -65,5 +67,4 @@ jobs:
             }
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-          REPORT_DIR : $(date +%Y%m%d_%H%M%S)
         if: always() # Pick up events even if the job fails or is canceled.
