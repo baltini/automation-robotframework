@@ -81,11 +81,11 @@ jobs:
                 passing_rate = (passed_tests / total_tests) * 100
                 print(f'{passing_rate:.2f}%')
                 ")
-                echo "Passing Rate = $passing_rate"
+                echo "::set-output name=date::$passing_rate"
 
       - name: Display Passing Rate
         run: | 
-          echo "Passing Rate: ${{ env.PASSING_RATE }}%"
+          echo "Passing Rate: ${{ steps.calculate-rate.outputs.date }}%"
 
       - name: Send message to Slack
         env:
