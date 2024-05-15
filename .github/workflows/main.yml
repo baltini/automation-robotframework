@@ -80,10 +80,6 @@ jobs:
                 # Calculate the passing rate
                 passing_rate = (passed_tests / total_tests) * 100
                 print(f'Passing rate: {passing_rate:.2f}%')
-                
-                # Save the passing rate to the GitHub Actions output variable
-                with open(os.environ['GITHUB_ENV'], 'a') as env_file:
-                  env_file.write(f'PASSING_RATE={round(passing_rate, 2)}\\n')
                 "
 
       - name: Display Passing Rate
