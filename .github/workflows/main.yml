@@ -1,6 +1,8 @@
 name: Robot Framework Tests
 
-on: [push, pull_request]
+on:
+  repository_dispatch:
+    types: [trigger-web-tests]
 
 jobs:
   build:
