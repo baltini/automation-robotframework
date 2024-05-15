@@ -1,6 +1,9 @@
 name: Robot Framework Tests
 
-on:
+on: 
+  push:
+    branches:
+      - master
   repository_dispatch:
     types: [trigger-web-tests]
 
