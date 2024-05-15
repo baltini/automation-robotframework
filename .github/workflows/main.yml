@@ -79,7 +79,7 @@ jobs:
             
                 # Calculate the passing rate
                 passing_rate = (passed_tests / total_tests) * 100
-                print({passing_rate:.2f}%)
+                print({passing_rate:.2f})
                 ")
                 echo "Passing Rate = $passing_rate"
 
