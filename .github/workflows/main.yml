@@ -61,8 +61,7 @@ jobs:
       - name: Calculate Test Passing Rate
         id: calculate-rate
         run: |
-                PASS_RATE=
-                python -c "
+                PASS_RATE=python -c "
                 import xml.etree.ElementTree as ET
                 tree = ET.parse('reports/${{ steps.datestring.outputs.date }}/output.xml')
                 root = tree.getroot()
