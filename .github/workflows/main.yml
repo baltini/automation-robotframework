@@ -63,7 +63,7 @@ jobs:
         run: |
                 python -c "
                 import xml.etree.ElementTree as ET
-                tree = ET.parse(reports/${{ steps.datestring.outputs.date }}/output.xml)
+                tree = ET.parse("reports/${{ steps.datestring.outputs.date }}/output.xml")
                 root = tree.getroot()
             
                 total_tests = 0
