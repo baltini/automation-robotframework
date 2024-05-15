@@ -82,6 +82,7 @@ jobs:
                 passing_rate = (passed_tests / total_tests) * 100
                 print(f'Passing rate: {passing_rate:.2f}%')
                 "
+                echo "Passing Rate = $PASS_RATE"
 
       - name: Display Passing Rate
         run: | 
