@@ -85,7 +85,7 @@ jobs:
                 
                 # Save the passing rate to the GitHub Actions output variable
                 with open(os.environ['GITHUB_ENV'], 'a') as env_file:
-                env_file.write(f'PASSING_RATE={round(passing_rate, 2)}\\n')
+                  env_file.write(f'PASSING_RATE={round(passing_rate, 2)}\\n')
                 "
 
       - name: Display Passing Rate
