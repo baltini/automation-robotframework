@@ -78,8 +78,6 @@ jobs:
                         passed_tests += 1
             
                 # Calculate the passing rate
-                if total_tests == 0:
-                    return 0.0
                 passing_rate = (passed_tests / total_tests) * 100
                 print(f'Passing rate: {passing_rate:.2f}%')
                 
