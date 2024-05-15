@@ -62,25 +62,30 @@ jobs:
         id: calculate-rate
         run: |
                 python -c "
-                import xmltodict
-          
-                # Load the Robot Framework output XML file
-                with open('reports/${{ steps.datestring.outputs.date }}/output.xml') as f:
-                    doc = xmltodict.parse(f.read())
-                
-                # Extract the total number of tests and the number of passed tests
-                total_tests = int(doc['robot']['statistics']['total']['stat']['@total'])
-                passed_tests = int(doc['robot']['statistics']['total']['stat']['@pass'])
-                
-                # Calculate passing rate
+                import xml.etree.ElementTree as ET
+                tree = ET.parse(reports/${{ steps.datestring.outputs.date }}/output.xml)
+                root = tree.getroot()
+            
+                total_tests = 0
+                passed_tests = 0
+            
+                # Traverse the XML structure to find test case results
+                for test in root.iter('test'):
+                    total_tests += 1
+                    # Check the status of the test case
+                    status = test.find('status').attrib['status']
+                    if status.lower() == 'pass':
+                        passed_tests += 1
+            
+                # Calculate the passing rate
+                if total_tests == 0:
+                    return 0.0
                 passing_rate = (passed_tests / total_tests) * 100
-                
-                # Print the passing rate
                 print(f'Passing rate: {passing_rate:.2f}%')
                 
                 # Save the passing rate to the GitHub Actions output variable
                 with open(os.environ['GITHUB_ENV'], 'a') as env_file:
-                    env_file.write(f'PASSING_RATE={round(passing_rate, 2)}\\n')
+                env_file.write(f'PASSING_RATE={round(passing_rate, 2)}\\n')
                 "
 
       - name: Display Passing Rate
