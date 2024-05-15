@@ -57,6 +57,12 @@ jobs:
         with:
           name: robotframework-reports-${{ github.run_number }}
           path: reports/**
+        
+      - name: Calculate Passing Rate
+        id: calculate_passing_rate
+        run: |
+          passing_rate=$(grep -Po 'Passing rate.*? \K[0-9.]+' results/${{ steps.datestring.outputs.date }}/report.html)
+          echo "passing_rate=$passing_rate" >> $GITHUB_ENV
 
       - name: Send message to Slack
         env:
