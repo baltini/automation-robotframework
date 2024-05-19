@@ -2,7 +2,7 @@ name: Robot Framework Tests
 
 on: 
   schedule:
-    - cron: '47 20 * * *'
+    - cron: '50 13 * * *'
   push:
   repository_dispatch:
     types: [trigger-web-tests]
