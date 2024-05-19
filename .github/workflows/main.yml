@@ -25,8 +25,7 @@ jobs:
           pip install -r requirements.txt
           sudo apt-get update
           sudo apt-get install -y wget unzip
-          LATEST_VERSION=$(curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE)
-          curl -sS -o chromedriver_linux64.zip https://chromedriver.storage.googleapis.com/$LATEST_VERSION/chromedriver_linux64.zip
+          wget https://storage.googleapis.com/chrome-for-testing-public/125.0.6422.60/linux64/chromedriver-linux64.zip
           unzip chromedriver-linux64.zip
           sudo mv chromedriver-linux64/chromedriver /usr/local/bin/
           sudo chmod +x /usr/local/bin/chromedriver
