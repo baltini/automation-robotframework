@@ -2,6 +2,7 @@
 Resource    ../Pages/MergeSuggestionPage.robot
 Resource    ../Pages/ProductManagementPage.robot
 Resource    ../Pages/ProductSuggestionPage.robot
+Resource    ../Variable/Variable.robot
 
 Library     String
 Library    SeleniumLibrary
@@ -13,6 +14,12 @@ Open Merge Suggestion Page
     Wait Until Element Is Visible    ${PAGE_TITLE}
     Page Should Contain Element      ${PAGE_TITLE}
 
+
+Search Merge Suggestion by Date This month
+    Wait Until Element Is Visible    ${DATE_FILTER}
+    Click Element    ${DATE_FILTER}
+    Wait Until Element Is Visible    ${DATE_THIS_MONTH}
+    Click Element   ${DATE_THIS_MONTH}
 
 Search Merge Suggestion by Product ID
     [Arguments]    ${productid}
