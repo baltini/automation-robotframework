@@ -94,5 +94,5 @@ jobs:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
         run: |
           LINK_SOURCE="https://healthy-strongly-wolf.ngrok-free.app/${{ steps.datestring.outputs.date }}/log.html"  # Your variable link source.
-          PAYLOAD="{\"text\":\"Web Automation Test is Complete with Passing Rate ${{ steps.calculate-rate.outputs.rate }}% : <${LINK_SOURCE}|Click here for details>\"}"
+          PAYLOAD="{\"text\":\"[STAGING]ERP Web Automation Test is Complete with Passing Rate ${{ steps.calculate-rate.outputs.rate }}% : <${LINK_SOURCE}|Click here for details>\"}"
           curl -X POST -H 'Content-type: application/json' --data "$PAYLOAD" $SLACK_WEBHOOK_URL
