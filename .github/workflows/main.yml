@@ -25,13 +25,17 @@ jobs:
           pip install -r requirements.txt
           sudo apt-get update
           sudo apt-get install -y wget unzip
+          sudo apt-get install -y wget unzip xvfb
           wget https://storage.googleapis.com/chrome-for-testing-public/125.0.6422.60/linux64/chromedriver-linux64.zip
           unzip chromedriver-linux64.zip
           sudo mv chromedriver-linux64/chromedriver /usr/local/bin/
           sudo chmod +x /usr/local/bin/chromedriver
           
       - name: Run Robot Framework tests
-        run: robot -d results Tests || true 
+        run: |
+          Xvfb :99 -screen 0 1920x1080x24 &  # Start Xvfb
+          export DISPLAY=:99  # Set DISPLAY environment variable
+          robot -d results Tests || true 
 
       - name: Generate Date String
         id: datestring

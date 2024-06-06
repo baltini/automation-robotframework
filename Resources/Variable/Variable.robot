@@ -6,7 +6,7 @@ ${USER}                     Admin Web 1
 ${INVALID_EMAIL}            admin123@gmail.com
 ${INVALID_PASS}             123123123
 ${LOGIN_PATH}               https://baltini-erp-web-staging-2vrwqmx2ba-as.a.run.app/login
-${BROWSER}                  headlesschrome
+${BROWSER}                  chrome
 ${WAITING_TIME}             10   
 ${MERGE_SUGGESTION_DATE}    01 Jun 2023 ~ 01 Jun 2024
 ${MERGE_SUGGESTION_ID}      PWAA044S24JER0010310
