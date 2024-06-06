@@ -1,6 +1,6 @@
 *** Settings ***
 Library    SeleniumLibrary
-Resource   ../Variable/Variable.robot 
+Resource   ../Variables/variable.robot 
 
 *** Variables ***
 ${MENU}                xpath=//*[text()='MENU']

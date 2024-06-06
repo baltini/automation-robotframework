@@ -1,6 +1,6 @@
 *** Settings ***
-Resource    ../Pages/LoginPage.robot
-Resource    ../Variable/Variable.robot
+Resource    ../Pages/login_page.robot
+Resource    ../Variables/variable.robot
 
 *** Keywords ***
 Login To ERP

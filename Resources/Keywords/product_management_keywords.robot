@@ -1,6 +1,6 @@
 *** Settings ***
-Resource    ../Pages/ProductManagementPage.robot
-Resource    ../Pages/ProductManagementEditPage.robot
+Resource    ../Pages/product_management_page.robot
+Resource    ../Pages/product_management_edit_page.robot
 Library    SeleniumLibrary
 Library    String
 

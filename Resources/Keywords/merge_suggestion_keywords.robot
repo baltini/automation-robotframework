@@ -1,8 +1,8 @@
 *** Settings ***
-Resource    ../Pages/MergeSuggestionPage.robot
-Resource    ../Pages/ProductManagementPage.robot
-Resource    ../Pages/ProductSuggestionPage.robot
-Resource    ../Variable/Variable.robot
+Resource    ../Pages/merge_suggestion_page.robot
+Resource    ../Pages/product_management_page.robot
+Resource    ../Pages/product_suggestion_page.robot
+Resource    ../Variables/variable.robot
 
 Library     String
 Library    SeleniumLibrary

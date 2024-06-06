@@ -1,8 +1,8 @@
 *** Settings ***
-Resource    ../Pages/HomePage.robot
+Resource    ../Pages/home_page.robot
 
 *** Keywords ***
-Home Page Should Contains Menu
+Validate Home Page Elements
     Wait Until Element Is Visible    ${MENU} 
     Wait Until Element Is Visible    ${IMAGE_LOGO} 
     Wait Until Element Is Visible    ${PRODUCT_MANAGEMENT} 

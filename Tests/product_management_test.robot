@@ -1,10 +1,10 @@
 *** Settings ***
 Library           SeleniumLibrary
-Resource          ../Resources/Keywords/LoginKeywords.robot
-Resource          ../Resources/Keywords/ProductManagementKeywords.robot
-Resource          ../Resources/Keywords/APIKeywords.robot
-Resource          ../Resources/Keywords/DBKeywords.robot
-Resource          ../Resources/Variable/Variable.robot
+Resource          ../Resources/Keywords/login_keywords.robot
+Resource          ../Resources/Keywords/product_management_keywords.robot
+Resource          ../Resources/Keywords/api_keywords.robot
+Resource          ../Resources/Keywords/db_keywords.robot
+Resource          ../Resources/Variables/variable.robot
 
 
 *** Test Cases ***
