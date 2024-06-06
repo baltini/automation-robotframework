@@ -15,11 +15,9 @@ Open Merge Suggestion Page
     Page Should Contain Element      ${PAGE_TITLE}
 
 
-Search Merge Suggestion by Date This month
+Search Merge Suggestion by Date Range
     Wait Until Element Is Visible    ${DATE_FILTER}
-    Click Element    ${DATE_FILTER}
-    Wait Until Element Is Visible    ${DATE_THIS_MONTH}
-    Click Element   ${DATE_THIS_MONTH}
+    Input Text    ${DATE_FILTER}    ${MERGE_SUGGESTION_DATE}
 
 Search Merge Suggestion by Product ID
     [Arguments]    ${productid}

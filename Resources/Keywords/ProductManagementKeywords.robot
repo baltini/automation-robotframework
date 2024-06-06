@@ -27,16 +27,17 @@ Open Product Management Page
     Click Element                    ${PRODUCT_MANAGEMENT_LINK}
     Wait Until Page Contains         Product Management
     
-Validate every Filter Label on page
-    Wait Until Page Contains    Search
-    Wait Until Page Contains    Status
-    Wait Until Page Contains    Size Checking Status
-    Wait Until Page Contains    Size Checking Issues
-    Wait Until Page Contains    Retailer
-    Wait Until Page Contains    Vendor
+Validate every filter label on the page
     Wait Until Page Contains    Product ID
-    Wait Until Page Contains    Category
+    Wait Until Page Contains    Size Checking Issues
     Wait Until Page Contains    Show Multiple Retailers
+    Wait Until Page Contains    Product Name
+    Wait Until Page Contains    Status
+    Wait Until Page Contains    Retailer
+    Wait Until Page Contains    Size Checking
+    Wait Until Page Contains    Category
+    Wait Until Page Contains    Merge Status
+    Wait Until Page Contains    Brand Name
 
 Validate Search result should contain
     [Arguments]    ${productNameResult}

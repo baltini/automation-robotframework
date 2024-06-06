@@ -11,7 +11,7 @@ Resource          ../Resources/Variable/Variable.robot
 Navigate to Product Management Page
     Login To ERP    ${EMAIL}     ${PASSWORD}  
     Open Product Management Page
-    Validate every Filter Label on page
+    Validate every filter label on the page
     Close Browser
 
 Search By Product Name
