@@ -13,7 +13,7 @@ Enter Search by Product Name with Delay
         Press Keys    ${SEARCH_FIELD}    ${char}
     END
     Press Keys    ${SEARCH_FIELD}    ENTER
-    Wait Until Element Is Visible    ${PRODUCT_IMAGE}    15
+    Wait Until Element Is Visible    ${PRODUCT_SEARCH_NAME}    15
 
 Product Name in n row should contain
     [Arguments]    ${n}    ${data}
