@@ -6,6 +6,7 @@ Resource          ../Resources/Variables/variable.robot
 
 *** Test Cases ***
 Navigate to Home Page
-    Login To ERP    ${EMAIL}     ${PASSWORD}  
+    [Documentation]  Validate that Home Page is displayed
+    Login To ERP    ${LOGIN_EMAIL}     ${LOGIN_PASSWORD}  
     Validate Home Page Elements
     Close Browser

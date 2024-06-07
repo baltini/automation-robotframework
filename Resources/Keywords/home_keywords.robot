@@ -18,4 +18,13 @@ Perfoming Logout
     Wait Until Element Is Visible    ${LOGOUT} 
     Click Element    ${LOGOUT} 
 
+Naviate to Account Settings
+    Wait Until Element Is Visible    ${USER_LOGIN}
+    Click Element    ${USER_LOGIN}
+    Wait Until Element Is Visible    ${ACCOUNT_SETTINGS}
+    Click Element    ${ACCOUNT_SETTINGS}
+
+
+    
+
 

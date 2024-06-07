@@ -7,12 +7,12 @@ Resource          ../Resources/Variables/variable.robot
 
 *** Test Cases ***
 Login With Valid Username and Password
-    Login To ERP    ${EMAIL}     ${PASSWORD}  
+    Login To ERP    ${LOGIN_EMAIL}     ${LOGIN_PASSWORD}  
     Validate Home Page Elements    
     Close Browser
 
 Login with Valid Username and Password Then logout
-    Login To ERP    ${EMAIL}     ${PASSWORD}  
+    Login To ERP    ${LOGIN_EMAIL}     ${LOGIN_PASSWORD}  
     Validate Home Page Elements
     Perfoming Logout
     Close Browser

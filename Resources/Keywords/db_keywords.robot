@@ -1,4 +1,6 @@
 *** Settings ***
+Resource    ../Variables/variable.robot
+
 Library     DatabaseLibrary
 
 *** Variables ***
@@ -20,5 +22,13 @@ Delete Product and it's Depedency From Database
     Execute Sql String    ${sql_query_delete_products}
     Execute Sql String    ${sql_query_delete_product_variants}
     Execute Sql String    ${sql_query_delete_product_images}
+    # Optionally, verify deletion or commit changes if needed
+    Disconnect From Database
+
+Delete User Test From Database
+    Connect To Database    ${DB_DRIVER}    ${DB_NAME}    ${DB_USER}    ${DB_PASSWORD}    ${DB_HOST}    ${DB_PORT}
+    ${sql_query_delete_user}=    Set Variable    delete from users where email ='${CREATE_USER_EMAIL}';
+
+    Execute Sql String    ${sql_query_delete_user}
     # Optionally, verify deletion or commit changes if needed
     Disconnect From Database
