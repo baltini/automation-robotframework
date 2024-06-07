@@ -26,4 +26,5 @@ Enter Password
     Input Text    ${PASSWORD_FIELD}    ${password}
 
 Click Login
+    Wait Until Element Is Visible    ${LOGIN_BUTTON}
     Click Element    ${LOGIN_BUTTON}
