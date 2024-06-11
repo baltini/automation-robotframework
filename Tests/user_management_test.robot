@@ -71,5 +71,5 @@ Register User With Existing Email
     Enter Password User    ${CREATE_USER_PS}   
     Enter Email User       ${CREATE_USER_EMAIL}
     Click Save Button
-    Wait Until Page Contains    Please contact Riza to report the issue
+    Wait Until Page Contains    Email address already registered.
     Close Browser
