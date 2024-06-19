@@ -2,7 +2,7 @@ name: Robot Framework Tests
 
 on: 
   schedule:
-    - cron: '0 23 * * *'
+    - cron: '0 2 * * *'
   push:
   repository_dispatch:
     types: [trigger-web-tests]
@@ -94,6 +94,7 @@ jobs:
           echo "Passing Rate: ${{ steps.calculate-rate.outputs.rate }}%"
 
       - name: Send message to Slack
+        if: steps.calculate-rate.outputs.rate < 75
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
         run: |
