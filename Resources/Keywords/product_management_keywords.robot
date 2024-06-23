@@ -1,4 +1,5 @@
 *** Settings ***
+Resource    ../Pages/home_page.robot
 Resource    ../Pages/product_management_page.robot
 Resource    ../Pages/product_management_edit_page.robot
 Library    SeleniumLibrary
@@ -23,6 +24,8 @@ Product Name in n row should contain
     Should Contain    ${resultToLower}    ${dataToLower}
 
 Open Product Management Page
+    Wait Until Element Is Enabled    ${PRODUCT_SYMBOL}
+    Click Element                    ${PRODUCT_SYMBOL}
     Wait Until Element Is Visible    ${PRODUCT_MANAGEMENT_LINK}
     Click Element                    ${PRODUCT_MANAGEMENT_LINK}
     Wait Until Page Contains         Product Management

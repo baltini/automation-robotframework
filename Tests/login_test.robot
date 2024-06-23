@@ -27,5 +27,6 @@ Empty Username and Password
     Click Login
     Wait Until Page Contains    Email field is required
     Wait Until Page Contains    The Password field is required
+    Page Should Contain    Sign In to Baltini ERP
     Close Browser
 

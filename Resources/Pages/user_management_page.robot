@@ -3,8 +3,8 @@ Library    SeleniumLibrary
 Resource   ../Variables/variable.robot 
 
 *** Variables ***
-${USER_MANAGEMENT_LINK}            xpath=//a[text()='User Management' and contains(@class,'flex')]
-${LABEL_USER_MANAGEMENT}            xpath=//*[text()='User Management']
+${USER_MANAGEMENT_LINK}            xpath=//div[contains(text(),'User Management')]
+${LABEL_USER_MANAGEMENT}            xpath=//h2[text()='User Management']
 ${LABEL_SEARCH}                     xpath=//*[text()='Search']
 ${LABEL_USERNAME}                   xpath=//*[text()='User Name']
 ${LABEL_EMAIL}                      xpath=//*[text()='Email']

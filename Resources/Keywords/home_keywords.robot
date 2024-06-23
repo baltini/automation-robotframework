@@ -3,10 +3,11 @@ Resource    ../Pages/home_page.robot
 
 *** Keywords ***
 Validate Home Page Elements
+    Wait Until Element Is Visible    ${ARROW_BUTTON}
+    Click Element    ${ARROW_BUTTON}
     Wait Until Element Is Visible    ${MENU} 
     Wait Until Element Is Visible    ${IMAGE_LOGO} 
-    Wait Until Element Is Visible    ${PRODUCT_MANAGEMENT} 
-    Wait Until Element Is Visible    ${MERGE_SUGGESTION} 
+    Wait Until Element Is Visible    ${PRODUCT} 
     Wait Until Element Is Visible    ${ORDERS}  
     Wait Until Element Is Visible    ${USER_MANAGEMENT}
     Wait Until Element Is Visible    ${ACTIVITY_LOG}

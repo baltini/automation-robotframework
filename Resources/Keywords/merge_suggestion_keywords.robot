@@ -1,4 +1,5 @@
 *** Settings ***
+Resource    ../Pages/home_page.robot
 Resource    ../Pages/merge_suggestion_page.robot
 Resource    ../Pages/product_management_page.robot
 Resource    ../Pages/product_suggestion_page.robot
@@ -9,11 +10,12 @@ Library    SeleniumLibrary
 
 *** Keywords ***
 Open Merge Suggestion Page
+    Wait Until Element Is Enabled    ${PRODUCT_SYMBOL}
+    Click Element                    ${PRODUCT_SYMBOL}
     Wait Until Element Is Visible    ${MERGE_SUGGESTION_LINK}
     Click Element                    ${MERGE_SUGGESTION_LINK}
     Wait Until Element Is Visible    ${PAGE_TITLE}
     Page Should Contain Element      ${PAGE_TITLE}
-
 
 Search Merge Suggestion by Date Range
     Wait Until Element Is Visible    ${DATE_FILTER}
